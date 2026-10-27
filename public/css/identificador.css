@@ -1,0 +1,162 @@
+
+/* ============ Tokens ============ */
+.ident-scope {
+  --bg: #EDF2EE;
+  --surface: #FFFFFF;
+  --ink: #17261F;
+  --ink-soft: #4C5F55;
+  --line: #CBD8CF;
+  --leaf: #2C6B57;
+  --leaf-dark: #1D4A3C;
+  --pollen: #E3B73A;
+  --danger: #A63D2F;
+  --radius: 14px;
+  --font-display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+.ident-scope * { box-sizing: border-box; }
+.ident-scope { color-scheme: light; }
+.ident-scope {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.55;
+}
+.ident-scope .app { max-width: 880px; margin: 0 auto; padding: 32px 20px 64px; }
+
+.ident-scope h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  max-width: 14ch;
+}
+.ident-scope .lead { color: var(--ink-soft); max-width: 52ch; margin: 0 0 28px; }
+
+/* ============ Tabs ============ */
+.ident-scope .pid-tabs { display: inline-flex; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px; gap: 4px; margin-bottom: 16px; }
+.ident-scope .pid-tab {
+  font: inherit; font-weight: 600; font-size: .95rem;
+  border: 0; background: transparent; color: var(--ink-soft);
+  padding: 10px 20px; border-radius: 999px; cursor: pointer;
+}
+.ident-scope .pid-tab[aria-selected="true"] { background: var(--leaf); color: #fff; }
+.ident-scope .pid-tab:hover:not([aria-selected="true"]) { color: var(--ink); }
+
+.ident-scope :focus-visible { outline: 3px solid var(--pollen); outline-offset: 2px; }
+
+/* ============ Capture panel ============ */
+.ident-scope .pid-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.ident-scope .dropzone {
+  display: grid; place-items: center; text-align: center;
+  min-height: 220px; padding: 24px;
+  border: 2px dashed var(--line); border-radius: 10px;
+  cursor: pointer; transition: border-color .15s, background .15s;
+}
+.ident-scope .dropzone:hover, .ident-scope .dropzone.is-over { border-color: var(--leaf); background: #F4F9F6; }
+.ident-scope .dropzone strong { display: block; font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 4px; }
+.ident-scope .dropzone span { color: var(--ink-soft); font-size: .92rem; }
+
+.ident-scope .camera { display: grid; gap: 14px; }
+.ident-scope .viewfinder {
+  position: relative; background: #0f1a15; border-radius: 10px; overflow: hidden;
+  aspect-ratio: 4 / 3; display: grid; place-items: center;
+}
+.ident-scope .viewfinder video { width: 100%; height: 100%; object-fit: cover; }
+.ident-scope .viewfinder .placeholder { color: #B9C9BF; padding: 24px; text-align: center; font-size: .95rem; }
+.ident-scope .pid-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+.ident-scope .pid-btn {
+  font: inherit; font-weight: 600; cursor: pointer;
+  border: 1px solid var(--leaf); background: var(--surface); color: var(--leaf-dark);
+  padding: 11px 18px; border-radius: 10px;
+}
+.ident-scope .pid-btn:hover { background: #F0F6F3; }
+.ident-scope .pid-btn-primary { background: var(--leaf); color: #fff; }
+.ident-scope .pid-btn-primary:hover { background: var(--leaf-dark); }
+.ident-scope .pid-btn-pollen { background: var(--pollen); border-color: var(--pollen); color: var(--ink); }
+.ident-scope .pid-btn-pollen:hover { background: #D6A92B; }
+.ident-scope .pid-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ============ Photo tray ============ */
+.ident-scope .tray { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+.ident-scope .tray:empty { display: none; }
+.ident-scope .shot { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--bg); }
+.ident-scope .shot img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.ident-scope .shot-bar { display: flex; gap: 6px; padding: 8px; align-items: center; }
+.ident-scope .shot-bar select { flex: 1; min-width: 0; font: inherit; font-size: .88rem; padding: 6px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.ident-scope .shot-bar button { font: inherit; border: 0; background: transparent; color: var(--danger); cursor: pointer; font-weight: 600; padding: 6px 8px; border-radius: 8px; }
+.ident-scope .shot-bar button:hover { background: #F6E4E1; }
+
+.ident-scope .actions { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.ident-scope .pid-hint { color: var(--ink-soft); font-size: .88rem; margin: 0; }
+
+/* ============ Status ============ */
+.ident-scope .pid-status { margin-top: 18px; padding: 12px 14px; border-radius: 10px; font-size: .95rem; }
+.ident-scope .pid-status[hidden] { display: none; }
+.ident-scope .pid-status.info { background: #E3EFEA; color: var(--leaf-dark); }
+.ident-scope .pid-status.error { background: #F6E4E1; color: var(--danger); }
+.ident-scope .pid-spinner { display: inline-block; width: 14px; height: 14px; margin-right: 8px; vertical-align: -2px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============ Results ============ */
+.ident-scope .results { margin-top: 32px; }
+.ident-scope .results h2 { font-family: var(--font-display); font-size: 1.6rem; margin: 0 0 14px; letter-spacing: -0.01em; }
+.ident-scope .result-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.ident-scope .result {
+  display: grid; grid-template-columns: 96px 1fr; gap: 16px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px;
+}
+.ident-scope .result:first-child { border-color: var(--leaf); box-shadow: 0 0 0 1px var(--leaf); }
+.ident-scope .result-img { width: 96px; height: 96px; border-radius: 10px; background: var(--bg); object-fit: cover; }
+.ident-scope .result h3 { font-family: var(--font-display); margin: 0; font-size: 1.2rem; line-height: 1.2; }
+.ident-scope .sci { font-style: italic; color: var(--ink-soft); margin: 2px 0 0; }
+.ident-scope .meta { font-size: .88rem; color: var(--ink-soft); margin: 6px 0 0; }
+.ident-scope .meter { margin-top: 10px; display: flex; align-items: center; gap: 10px; }
+.ident-scope .meter-track { flex: 1; height: 8px; border-radius: 99px; background: var(--bg); overflow: hidden; }
+.ident-scope .meter-fill { height: 100%; background: var(--leaf); border-radius: 99px; }
+.ident-scope .meter-label { font-weight: 700; font-size: .9rem; min-width: 3ch; text-align: right; }
+.ident-scope .result a { color: var(--leaf-dark); font-weight: 600; font-size: .9rem; }
+.ident-scope .disclaimer { margin-top: 18px; font-size: .88rem; color: var(--ink-soft); border-left: 3px solid var(--pollen); padding-left: 12px; max-width: 64ch; }
+
+/* ---- Coincidencia con el catálogo del vivero ---- */
+.ident-scope .catalogo { margin-top: 14px; padding: 14px; border-radius: 10px; background: #E8F1EC; border: 1px solid #BCD3C7; }
+.ident-scope .catalogo.agotada { background: #F1F1EC; border-color: var(--line); }
+.ident-scope .catalogo-titulo { margin: 0 0 6px; font-weight: 700; font-size: .9rem; color: var(--leaf-dark); }
+.ident-scope .catalogo-fila { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.ident-scope .catalogo-nombre { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; }
+.ident-scope .catalogo-precio { font-weight: 700; font-size: 1.1rem; }
+.ident-scope .cuidados { display: grid; grid-template-columns: max-content 1fr; gap: 2px 14px; margin: 10px 0 0; font-size: .9rem; }
+.ident-scope .cuidados dt { color: var(--ink-soft); }
+.ident-scope .cuidados dd { margin: 0; }
+.ident-scope .catalogo-pie { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+.ident-scope .stock { font-size: .9rem; font-weight: 600; color: var(--leaf-dark); }
+.ident-scope .agotada .stock { color: var(--danger); }
+.ident-scope .pid-btn-sm { padding: 8px 14px; font-size: .9rem; text-decoration: none; display: inline-block; color: #fff; }
+.ident-scope .result a.pid-btn-sm { color: #fff; }
+
+@media (max-width: 520px) {
+  .ident-scope .result { grid-template-columns: 72px 1fr; }
+  .ident-scope .result-img { width: 72px; height: 72px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ident-scope * { transition: none !important; animation-duration: 1.5s !important; }
+}
+.ident-scope .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Encaje con Mantirienda */
+.ident-scope{--bg:#FDFBF7;--surface:#FFFFFF;--ink:#1f2937;--ink-soft:#6b7280;--line:rgba(138,154,134,.3);--leaf:#2D4A3E;--leaf-dark:#1f3a2e;--pollen:#D9795B;--danger:#b91c1c;--radius:24px;--font-display:"Playfair Display",serif;--font-body:"Plus Jakarta Sans",system-ui,sans-serif;background:transparent}
+.ident-scope .app{max-width:880px;padding:0}
+.ident-scope .pid-btn{border-radius:999px}
+.ident-scope .pid-btn-pollen{color:#fff}
+.ident-scope .pid-btn-pollen:hover{background:#c4694d}
+.ident-scope .dropzone:hover,.ident-scope .dropzone.is-over{background:#F4F7F3}
+.ident-scope .catalogo{background:#EEF3EC;border-color:rgba(79,127,99,.3)}

@@ -1,0 +1,18 @@
+Poné acá las fotos de las flores con estos nombres (los mismos que usaba info_flores.js):
+- ceibo.avif
+- tulipan.jpg
+- peonia.webp
+- plumerillo.jfif
+- calceolaria.jfif
+- glandularia.jpg
+- verbena.webp
+- orquidea.jfif
+- rosa.jfif
+- tulipan_real.jfif
+- murcielago.jfif
+- jade.avif
+- ciclamen.jfif
+- labios.jpg
+- venus.webp
+- jengibre.jfif
+- camelia.jfif

@@ -1,0 +1,45 @@
+/* Mantirienda · estilos propios (se combinan con Tailwind) */
+:root { --green: #2D4A3E; --green-dark: #1f3a2e; --leaf: #4F7F63; --sage: #8A9A86; --cream: #FDFBF7; --blush: #F7D6D0; --accent: #D9795B; }
+html { scroll-behavior: smooth; }
+body { background: var(--cream); }
+.container-x { max-width: 72rem; margin-inline: auto; padding-inline: 1.5rem; }
+.eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: .7rem; font-weight: 700; color: var(--accent); }
+
+/* Botones */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: .7rem 1.4rem; border-radius: 9999px; font-weight: 600; font-size: .875rem; transition: all .2s; cursor: pointer; border: 1px solid transparent; }
+.btn-primary { background: var(--green); color: #fff; } .btn-primary:hover { background: var(--leaf); }
+.btn-accent { background: var(--accent); color: #fff; } .btn-accent:hover { background: #c4694d; }
+.btn-outline { border-color: var(--green); color: var(--green); background: transparent; } .btn-outline:hover { background: var(--green); color: #fff; }
+.btn-ghost { border-color: rgba(255,255,255,.4); color: #fff; } .btn-ghost:hover { background: rgba(255,255,255,.12); }
+.btn-block { width: 100%; }
+
+/* Tarjetas y formularios */
+.card { background: #fff; border: 1px solid rgba(138,154,134,.22); border-radius: 1.25rem; box-shadow: 0 1px 2px rgba(31,58,46,.04); }
+.card-hover { transition: all .3s; } .card-hover:hover { box-shadow: 0 14px 30px rgba(31,58,46,.10); transform: translateY(-3px); }
+.input { width: 100%; padding: .72rem .95rem; border: 1px solid rgba(138,154,134,.55); border-radius: .75rem; background: #fff; outline: none; font-size: .925rem; transition: .15s; }
+.input:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(79,127,99,.18); }
+.label { display: block; font-size: .8rem; font-weight: 600; color: #374151; margin-bottom: .35rem; }
+.hint { font-size: .75rem; color: #6b7280; margin-top: .3rem; }
+.badge { display: inline-flex; align-items: center; gap: .25rem; padding: .2rem .65rem; border-radius: 9999px; font-size: .72rem; font-weight: 600; }
+.badge-ok { background: #dcfce7; color: #166534; } .badge-warn { background: #fef3c7; color: #92400e; } .badge-off { background: #f3f4f6; color: #4b5563; } .badge-bad { background: #fee2e2; color: #991b1b; }
+
+/* Pestañas de la cuenta */
+.tab { display: inline-flex; align-items: center; gap: .45rem; padding: .75rem 1rem; font-size: .875rem; font-weight: 600; color: #6b7280; border-bottom: 2px solid transparent; white-space: nowrap; }
+.tab:hover { color: var(--green); } .tab-on { color: var(--green); border-bottom-color: var(--green); }
+
+/* Hero y secciones */
+.hero { position: relative; overflow: hidden; color: var(--cream);
+  background: linear-gradient(135deg, #1f3a2e 0%, #2D4A3E 55%, #3d6350 100%); }
+.hero::before { content: ""; position: absolute; inset: 0; opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3C/svg%3E"); background-size: 80px; }
+.photo { background-color: var(--sage); background-size: cover; background-position: center; }
+.step-num { width: 2.5rem; height: 2.5rem; border-radius: 9999px; background: var(--green); color: #fff; display: grid; place-items: center; font-weight: 700; font-family: 'Playfair Display', serif; }
+.divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(138,154,134,.5), transparent); }
+.capullo { color: #2f9e44; } .flor-roja { color: #d62839; }
+.mesa { transition: all .2s; } .mesa:hover { transform: translateY(-2px); }
+.pay-opt { display: block; cursor: pointer; }
+.pay-opt input { position: absolute; opacity: 0; }
+.pay-opt .box { border: 1.5px solid rgba(138,154,134,.5); border-radius: 1rem; padding: 1rem; transition: .15s; background: #fff; }
+.pay-opt input:checked + .box { border-color: var(--green); background: #f3f8f4; box-shadow: 0 0 0 3px rgba(79,127,99,.15); }
+.pay-opt input:focus-visible + .box { box-shadow: 0 0 0 3px rgba(79,127,99,.35); }
+@media print { header, footer { display: none; } }

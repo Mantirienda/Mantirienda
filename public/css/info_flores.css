@@ -1,0 +1,451 @@
+/* ==========================================================
+   PUENTE DE FLORES · MANTIRIENDA — estilo moderno-botánico
+   ========================================================== */
+.flores-scope {
+    --bg: #FDFBF7;
+    --bg-deep: #F4EFE6;
+    --paper: #FFFFFF;
+    --ink: #1f2937;
+    --ink-soft: #6b7280;
+    --moss: #2D4A3E;
+    --moss-deep: #1f3a2e;
+    --sage: #8A9A86;
+    --sage-soft: #E6ECE4;
+    --terracotta: #D9795B;
+    --gold: #c9a14a;
+    --line: rgba(23, 39, 28, 0.12);
+    --shadow: 0 14px 40px -18px rgba(29, 49, 35, 0.35);
+    --shadow-lg: 0 40px 80px -30px rgba(29, 49, 35, 0.55);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --radius: 22px;
+}
+
+.flores-scope *, .flores-scope *::before, .flores-scope *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.flores-scope { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+
+.flores-scope {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100dvh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+body.modal-open { overflow: hidden; }
+
+.flores-scope ::selection { background: var(--sage); color: var(--moss-deep); }
+
+/* ---------- Barra de scroll personalizada ---------- */
+.flores-scope { scrollbar-width: thin; scrollbar-color: var(--moss) var(--bg-deep); }
+.flores-scope ::-webkit-scrollbar { width: 12px; height: 12px; }
+.flores-scope ::-webkit-scrollbar-track { background: var(--bg-deep); }
+.flores-scope ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--sage), var(--moss));
+    border-radius: 20px;
+    border: 3px solid var(--bg-deep);
+}
+.flores-scope ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--moss), var(--moss-deep)); }
+
+.flores-scope .scroll-progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 100%;
+    transform-origin: left; transform: scaleX(0);
+    background: linear-gradient(90deg, var(--sage), var(--moss), var(--terracotta));
+    z-index: 60;
+}
+
+/* ---------- Fondo ambiente ---------- */
+.flores-scope .ambient { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.flores-scope .blob {
+    position: absolute; border-radius: 50%; filter: blur(70px); opacity: .55;
+    animation: float 18s ease-in-out infinite alternate;
+}
+.flores-scope .b1 { width: 45vmax; height: 45vmax; background: var(--sage-soft); top: -15vmax; left: -10vmax; }
+.flores-scope .b2 { width: 35vmax; height: 35vmax; background: #f0d9c4; bottom: -10vmax; right: -8vmax; animation-delay: -6s; }
+.flores-scope .b3 { width: 25vmax; height: 25vmax; background: #d5e0c3; top: 40%; left: 55%; animation-delay: -12s; }
+@keyframes float {
+    to { transform: translate(4vmax, -3vmax) scale(1.1); }
+}
+.flores-scope::before {
+    content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .35;
+    background-image: radial-gradient(rgba(23,39,28,.08) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
+.flores-scope .petal {
+    position: absolute; top: -40px; width: 14px; height: 14px;
+    background: var(--sage); border-radius: 0 100% 0 100%; opacity: .5;
+    animation: fall linear infinite;
+}
+@keyframes fall {
+    to { transform: translate(var(--x, 60px), 110vh) rotate(540deg); }
+}
+
+/* ---------- Layout ---------- */
+.flores-scope .page-container {
+    position: relative; z-index: 2;
+    width: min(1240px, 100%);
+    margin: 0 auto;
+    padding: clamp(48px, 9vw, 110px) clamp(16px, 4vw, 40px) 40px;
+}
+
+/* Reveal al hacer scroll */
+.flores-scope .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.flores-scope .reveal.in { opacity: 1; transform: none; }
+
+/* ---------- Hero ---------- */
+.flores-scope .hero { text-align: center; max-width: 760px; margin: 0 auto clamp(32px, 6vw, 56px); }
+.flores-scope .badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 18px; border-radius: 99px;
+    background: var(--moss); color: var(--paper);
+    font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 500;
+}
+.flores-scope .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sage); animation: pulse 2s infinite; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 6px rgba(169,189,154,.25); } }
+.flores-scope .hero h1 {
+    font-family: "Playfair Display", serif; font-weight: 500;
+    font-size: clamp(2.8rem, 9vw, 6.2rem); line-height: .95; letter-spacing: -.03em;
+    margin: 22px 0 18px; color: var(--moss-deep);
+    transition-delay: .1s;
+}
+.flores-scope .hero h1 em { font-style: italic; font-weight: 300; color: var(--terracotta); }
+.flores-scope .hero p { color: var(--ink-soft); font-size: clamp(1rem, 2.2vw, 1.15rem); line-height: 1.6; transition-delay: .2s; }
+.flores-scope .hero-line { width: 160px; margin: 26px auto 0; transition-delay: .3s; }
+.flores-scope .hero-line svg { width: 100%; height: 20px; }
+.flores-scope .hero-line path {
+    fill: none; stroke: var(--moss); stroke-width: 2; stroke-linecap: round;
+    stroke-dasharray: 260; stroke-dashoffset: 260;
+}
+.flores-scope .hero-line.in path { animation: draw 2s .4s var(--ease) forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+/* ---------- Filtros ---------- */
+.flores-scope .filters {
+    position: sticky; top: 12px; z-index: 20;
+    background: rgba(251, 249, 243, .78);
+    backdrop-filter: blur(16px) saturate(1.3); -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 16px clamp(14px, 3vw, 24px);
+    box-shadow: var(--shadow);
+    display: grid; gap: 12px;
+    margin-bottom: 18px;
+}
+.flores-scope .filter-group { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.flores-scope .filter-label {
+    flex: none; width: 70px;
+    font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600;
+}
+.flores-scope .chips {
+    display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+    padding: 3px; scroll-snap-type: x proximity;
+    mask-image: linear-gradient(90deg, #000 92%, transparent);
+}
+.flores-scope .chips::-webkit-scrollbar { display: none; }
+.flores-scope .chip {
+    flex: none; scroll-snap-align: start;
+    display: inline-flex; align-items: center; gap: 8px;
+    font: inherit; font-size: .9rem; font-weight: 500; color: var(--moss);
+    padding: 8px 15px; min-height: 40px;
+    background: var(--paper); border: 1.5px solid var(--line); border-radius: 99px;
+    cursor: pointer; transition: all .35s var(--ease);
+}
+.flores-scope .chip:hover { border-color: var(--moss); transform: translateY(-2px); }
+.flores-scope .chip:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 2px; }
+.flores-scope .chip .x {
+    display: inline-grid; place-items: center;
+    width: 0; height: 18px; border-radius: 50%; overflow: hidden;
+    background: var(--paper); color: var(--moss); font-size: .7rem;
+    transition: width .35s var(--spring);
+}
+.flores-scope .chip.active { background: var(--moss); color: var(--paper); border-color: var(--moss); box-shadow: 0 8px 18px -8px var(--moss); }
+.flores-scope .chip.active .x { width: 18px; }
+.flores-scope .chip.pop { animation: pop .45s var(--spring); }
+@keyframes pop { 40% { transform: scale(1.12); } }
+
+.flores-scope .active-filters {
+    display: none; align-items: center; gap: 10px; flex-wrap: wrap;
+    padding-top: 12px; border-top: 1px dashed var(--line);
+}
+.flores-scope .active-filters.show { display: flex; animation: slideDown .5s var(--ease); }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } }
+.flores-scope .active-label { font-size: .8rem; color: var(--ink-soft); }
+.flores-scope .active-list { display: flex; gap: 6px; flex-wrap: wrap; }
+.flores-scope .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 6px 5px 12px; border-radius: 99px;
+    background: var(--terracotta); color: var(--paper); font-size: .82rem; font-weight: 500;
+    animation: pop .45s var(--spring);
+}
+.flores-scope .pill button {
+    width: 22px; height: 22px; border-radius: 50%; border: 0; cursor: pointer;
+    background: rgba(255,255,255,.25); color: inherit; font-size: .75rem;
+    transition: background .2s, transform .3s var(--spring);
+}
+.flores-scope .pill button:hover { background: rgba(255,255,255,.45); transform: rotate(90deg); }
+.flores-scope .clear-all {
+    margin-left: auto; font: inherit; font-size: .82rem; font-weight: 500;
+    background: none; border: 0; color: var(--terracotta); cursor: pointer;
+    padding: 6px 10px; border-radius: 99px; transition: background .25s;
+}
+.flores-scope .clear-all:hover { background: rgba(200,105,74,.1); }
+.flores-scope .clear-all.solid { margin: 0; background: var(--moss); color: var(--paper); padding: 10px 20px; }
+
+.flores-scope .results-count { font-size: .85rem; color: var(--ink-soft); margin: 0 4px 18px; }
+.flores-scope .results-count b { color: var(--moss); font-family: "Playfair Display", serif; font-size: 1.1rem; }
+
+/* ---------- Galería ---------- */
+.flores-scope .gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+    gap: clamp(16px, 2.5vw, 28px);
+}
+.flores-scope .flower-card {
+    position: relative; cursor: pointer;
+    height: 440px;
+    border-radius: var(--radius); overflow: hidden;
+    background: var(--moss-deep);
+    box-shadow: var(--shadow);
+    opacity: 0; transform: translateY(40px) scale(.96);
+    transition: box-shadow .5s var(--ease), transform .7s var(--ease), opacity .7s var(--ease);
+    outline: none;
+}
+.flores-scope .flower-card.in { opacity: 1; transform: none; }
+.flores-scope .flower-card.out { opacity: 0; transform: scale(.9); }
+.flores-scope .flower-card:focus-visible { box-shadow: 0 0 0 3px var(--terracotta), var(--shadow-lg); }
+.flores-scope .card-image-container { position: absolute; inset: 0; }
+.flores-scope .card-image-container img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform 1.2s var(--ease), filter .6s;
+    filter: saturate(.92);
+}
+.flores-scope .card-image-container::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 35%, rgba(23,39,28,.35) 55%, rgba(17,30,21,.92) 100%);
+}
+.flores-scope .card-badge {
+    position: absolute; top: 16px; left: 16px; z-index: 2;
+    padding: 6px 12px; border-radius: 99px;
+    background: rgba(251,249,243,.85); backdrop-filter: blur(8px);
+    color: var(--moss); font-size: .74rem; font-weight: 600; letter-spacing: .04em;
+}
+.flores-scope .card-num {
+    position: absolute; top: 14px; right: 18px; z-index: 2;
+    font-family: "Playfair Display", serif; font-style: italic; font-size: 1.4rem; color: rgba(251,249,243,.8);
+}
+.flores-scope .card-content {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+    padding: 22px; color: var(--paper);
+}
+.flores-scope .card-subtitle { font-family: "Playfair Display", serif; font-style: italic; font-size: .92rem; color: var(--sage); }
+.flores-scope .card-title {
+    font-family: "Playfair Display", serif; font-weight: 500;
+    font-size: 1.65rem; line-height: 1.1; letter-spacing: -.01em; margin: 4px 0 14px;
+}
+.flores-scope .card-footer {
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    font-size: .84rem; color: rgba(251,249,243,.75);
+    padding-top: 14px; border-top: 1px solid rgba(251,249,243,.18);
+}
+.flores-scope .tap-indicator {
+    display: inline-flex; align-items: center; gap: 6px; flex: none;
+    padding: 7px 13px; border-radius: 99px;
+    background: var(--paper); color: var(--moss); font-weight: 600;
+    transition: transform .4s var(--spring), background .3s;
+}
+@media (hover: hover) {
+    .flores-scope .flower-card.in:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+    .flores-scope .flower-card:hover img { transform: scale(1.08); filter: saturate(1.1); }
+    .flores-scope .flower-card:hover .tap-indicator { transform: translateX(4px); background: var(--sage); }
+}
+.flores-scope .flower-card:active { transform: scale(.98); }
+
+.flores-scope .empty-state { text-align: center; padding: 70px 20px; color: var(--ink-soft); animation: slideDown .5s var(--ease); }
+.flores-scope .empty-icon { font-size: 2.6rem; display: block; margin-bottom: 10px; animation: sway 3s ease-in-out infinite; }
+@keyframes sway { 50% { transform: rotate(-10deg); } }
+.flores-scope .empty-state p { margin-bottom: 18px; }
+
+.flores-scope .site-footer { text-align: center; margin-top: 70px; font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); }
+
+/* ==========================================================
+   MODAL — tamaño fijo, sin scroll interno
+   ========================================================== */
+.flores-scope .modal-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    display: grid; place-items: center;
+    padding: clamp(10px, 3vw, 30px);
+    background: rgba(17, 30, 21, .55);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    opacity: 0; visibility: hidden;
+    transition: opacity .5s var(--ease), visibility .5s;
+}
+.flores-scope .modal-overlay.active { opacity: 1; visibility: visible; }
+
+.flores-scope .modal-card {
+    position: relative;
+    width: min(980px, 100%);
+    height: min(600px, calc(100dvh - 40px));
+    display: grid; grid-template-columns: 44% 1fr;
+    background: var(--paper);
+    border-radius: 28px; overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transform: translateY(60px) scale(.9) rotateX(8deg);
+    opacity: 0;
+    transition: transform .8s var(--spring), opacity .5s var(--ease);
+    perspective: 1000px;
+}
+.flores-scope .modal-overlay.active .modal-card { transform: none; opacity: 1; }
+
+.flores-scope .modal-close {
+    position: absolute; top: 14px; right: 14px; z-index: 5;
+    width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer;
+    background: var(--paper); box-shadow: var(--shadow);
+    display: grid; place-items: center;
+    transition: transform .45s var(--spring), background .3s;
+}
+.flores-scope .modal-close svg { width: 18px; height: 18px; stroke: var(--moss); stroke-width: 2.2; stroke-linecap: round; fill: none; }
+.flores-scope .modal-close:hover { transform: rotate(90deg) scale(1.08); background: var(--sage-soft); }
+
+.flores-scope .modal-image-wrapper { position: relative; overflow: hidden; background: var(--moss-deep); }
+.flores-scope .modal-image-wrapper img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    clip-path: inset(100% 0 0 0);
+    transform: scale(1.25);
+}
+.flores-scope .modal-overlay.active .modal-image-wrapper img {
+    animation: imgReveal 1.2s .15s var(--ease) forwards;
+}
+@keyframes imgReveal { to { clip-path: inset(0 0 0 0); transform: scale(1); } }
+.flores-scope .modal-tag {
+    position: absolute; left: 18px; bottom: 18px;
+    padding: 7px 14px; border-radius: 99px;
+    background: var(--terracotta); color: var(--paper); font-size: .78rem; font-weight: 600; letter-spacing: .06em;
+}
+.flores-scope .leaf-deco { position: absolute; top: 16px; left: 16px; width: 48px; height: 48px; opacity: .85; }
+.flores-scope .leaf-deco path {
+    fill: none; stroke: var(--paper); stroke-width: 2.5; stroke-linecap: round;
+    stroke-dasharray: 300; stroke-dashoffset: 300;
+}
+.flores-scope .modal-overlay.active .leaf-deco path { animation: draw 2s .8s var(--ease) forwards; }
+
+.flores-scope .modal-info {
+    display: flex; flex-direction: column; min-height: 0; overflow: hidden;
+    padding: clamp(22px, 3.5vw, 40px);
+    padding-right: clamp(22px, 5vw, 60px);
+}
+.flores-scope .modal-subtitle { font-family: "Playfair Display", serif; font-style: italic; color: var(--terracotta); font-size: 1rem; }
+.flores-scope .modal-title {
+    font-family: "Playfair Display", serif; font-weight: 500; color: var(--moss-deep);
+    font-size: clamp(1.7rem, 3.5vw, 2.6rem); line-height: 1.05; letter-spacing: -.02em;
+    margin: 6px 0 clamp(14px, 2.5vh, 24px);
+}
+.flores-scope .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.flores-scope .info-box {
+    position: relative; overflow: hidden;
+    display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 10px;
+    padding: 11px 13px; border-radius: 16px;
+    background: var(--sage-soft); border: 1px solid rgba(47,74,54,.08);
+    transition: transform .35s var(--spring), background .3s;
+}
+.flores-scope .info-box:hover { transform: translateY(-3px); background: #d4dfc5; }
+.flores-scope .box-icon { grid-row: span 2; align-self: center; font-size: 1.15rem; }
+.flores-scope .box-label { font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; }
+.flores-scope .box-value {
+    font-size: .92rem; font-weight: 500; color: var(--moss-deep); line-height: 1.25;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.flores-scope .modal-description { margin-top: clamp(14px, 2.5vh, 22px); min-height: 0; }
+.flores-scope .modal-description h3 {
+    font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft);
+    display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-weight: 600;
+}
+.flores-scope .modal-description h3::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.flores-scope .modal-description p {
+    color: var(--ink); line-height: 1.6; font-size: .96rem;
+    display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden;
+}
+.flores-scope .modal-nav {
+    margin-top: auto; padding-top: 14px;
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    font-size: .82rem; color: var(--ink-soft);
+}
+.flores-scope .modal-nav button {
+    font: inherit; font-weight: 500; color: var(--moss);
+    padding: 9px 15px; min-height: 40px; border-radius: 99px; cursor: pointer;
+    background: transparent; border: 1.5px solid var(--line); transition: all .3s var(--ease);
+}
+.flores-scope .modal-nav button:hover { background: var(--moss); color: var(--paper); border-color: var(--moss); }
+
+/* Animación de entrada de cada dato */
+.flores-scope .anim { opacity: 0; transform: translateY(18px); filter: blur(6px); }
+.flores-scope .modal-overlay.active .anim {
+    animation: itemIn .75s var(--ease) forwards;
+    animation-delay: calc(.25s + var(--d) * .09s);
+}
+@keyframes itemIn { to { opacity: 1; transform: none; filter: blur(0); } }
+.flores-scope .modal-overlay.active .info-box.anim { animation-name: boxIn; animation-timing-function: var(--spring); }
+@keyframes boxIn {
+    from { opacity: 0; transform: translateY(20px) scale(.85); filter: blur(4px); }
+    to { opacity: 1; transform: none; filter: blur(0); }
+}
+/* Re-dispara la animación al cambiar de flor */
+.flores-scope .modal-card.swap .anim, .flores-scope .modal-card.swap .modal-image-wrapper img { animation: none !important; }
+
+/* ---------- Responsive ---------- */
+.flores-scope @media (max-width: 760px) {
+    .flores-scope .modal-card {
+        grid-template-columns: 1fr;
+        grid-template-rows: clamp(150px, 32dvh, 260px) 1fr;
+        height: calc(100dvh - 20px);
+        max-height: 720px;
+        border-radius: 24px;
+    }
+    .flores-scope .modal-info { padding: 18px 18px 16px; }
+    .flores-scope .modal-subtitle { font-size: .9rem; }
+    .flores-scope .modal-title { margin-bottom: 12px; }
+    .flores-scope .modal-grid { gap: 8px; }
+    .flores-scope .info-box { padding: 9px 10px; }
+    .flores-scope .box-value { font-size: .84rem; }
+    .flores-scope .modal-description p { font-size: .9rem; -webkit-line-clamp: 4; line-height: 1.5; }
+    .flores-scope .filter-label { width: auto; }
+    .flores-scope .filter-group { flex-direction: column; align-items: stretch; gap: 6px; }
+    .flores-scope .filters { top: 8px; padding: 12px; }
+    .flores-scope .flower-card { height: 380px; }
+}
+@media (max-width: 760px) and (max-height: 680px) {
+    .flores-scope .modal-description p { -webkit-line-clamp: 2; }
+    .flores-scope .box-icon { display: none; }
+    .flores-scope .info-box { grid-template-columns: 1fr; }
+}
+@media (min-width: 761px) and (max-height: 560px) {
+    .flores-scope .modal-description p { -webkit-line-clamp: 2; }
+    .flores-scope .modal-title { font-size: 1.6rem; }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+    .flores-scope .modal-card { grid-template-columns: 38% 1fr; grid-template-rows: 1fr; height: calc(100dvh - 20px); }
+    .flores-scope .modal-nav { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .flores-scope *, .flores-scope *::before, .flores-scope *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* Integración Mantirienda */
+.flores-scope{position:relative;overflow:hidden;min-height:auto;border-radius:2rem;z-index:0}
+.flores-scope .ambient{position:absolute}
+.flores-scope::before{position:absolute}
+.flores-scope .scroll-progress{display:none}
+body.modal-open{overflow:hidden}
+
+/* Encaje con el estilo de Mantirienda */
+.flores-scope{background:var(--bg);border:1px solid rgba(138,154,134,.2);padding:0}
+.flores-scope .page-container{padding-top:0}
+.flores-scope .hero{max-width:none;margin:0 calc(-1 * clamp(16px,4vw,40px)) clamp(32px,5vw,48px);padding:clamp(48px,7vw,80px) 24px;border-radius:var(--radius) var(--radius) 0 0}
+.flores-scope .hero > *{position:relative;z-index:1}
+.flores-scope .hero .badge{background:rgba(255,255,255,.12);color:#FDFBF7;border-color:rgba(255,255,255,.2)}
+.flores-scope .hero h1{color:#fff;font-weight:700}
+.flores-scope .hero h1 em{color:#F7D6D0}
+.flores-scope .hero p{color:rgba(253,251,247,.8);max-width:620px;margin:0 auto}
+.flores-scope .hero-line path{stroke:#F7D6D0}
+.flores-scope .info-box:hover{background:#dbe4d8}
